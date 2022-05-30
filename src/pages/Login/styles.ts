@@ -39,6 +39,17 @@ export const FormGroup = styled.form`
   display: flex;
   flex: 2;
   flex-direction: column;
+
+  row-gap: 1rem;
+
+  h2 {
+    font-weight: 400;
+    padding-bottom: 1rem;
+  }
+
+  p > a {
+    font-weight: 700;
+  }
 `;
 
 export const InputGroup = styled.div``;

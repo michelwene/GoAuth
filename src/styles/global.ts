@@ -55,11 +55,14 @@ input{
 }
 
 a {
+    cursor:pointer ;
     text-decoration: none;
   }
-  li {
+
+li {
     list-style-type: none;
   }
+
 [disabled]{
     cursor: not-allowed;
 }
