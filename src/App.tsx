@@ -1,8 +1,11 @@
+import { Router } from "pages/router";
+import { BrowserRouter } from "react-router-dom";
+
 function App() {
   return (
-    <>
-      <h1>Nt</h1>
-    </>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 }
 
