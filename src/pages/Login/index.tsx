@@ -25,12 +25,12 @@ export function Login() {
         <FormGroup>
           <h2>Acessar Conta</h2>
           <InputGroup>
+            <FormInput required placeholder=" " type="email" />
             <FormLabel>E-mail</FormLabel>
-            <FormInput />
           </InputGroup>
           <InputGroup>
+            <FormInput required placeholder=" " type="password" />
             <FormLabel>Senha</FormLabel>
-            <FormInput />
           </InputGroup>
           <FormLink>Esqueci minha senha</FormLink>
           <FormButton>Entrar</FormButton>
