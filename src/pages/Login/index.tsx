@@ -5,10 +5,7 @@ import {
   Content,
   FormButton,
   FormGroup,
-  FormInput,
-  FormLabel,
   FormLink,
-  InputGroup,
 } from "./styles";
 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -16,6 +13,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Input } from "components/Input";
 
 const FormSignInSchema = yup.object({
   email: yup.string().required("E-mail obrigatório").trim(),
@@ -58,17 +56,18 @@ export function Login() {
         </div>
         <FormGroup onSubmit={handleSubmit(handleFormSubmit)}>
           <h2>Acessar Conta</h2>
-          <InputGroup>
-            <FormInput placeholder=" " type="email" {...register("email")} />
-            <FormLabel>E-mail</FormLabel>
-          </InputGroup>
-          <InputGroup>
-            <FormInput
-              placeholder=" "
-              type={showPassword ? "text" : "password"}
-              {...register("password")}
-            />
-            <FormLabel>Senha</FormLabel>
+          <Input
+            label="E-mail"
+            type="email"
+            {...register("email")}
+            error={errors.email}
+          />
+          <Input
+            type={showPassword ? "text" : "password"}
+            label="Senha"
+            {...register("password")}
+            error={errors.password}
+          >
             <button type="button" onClick={handleShowPassword}>
               {showPassword ? (
                 <AiFillEyeInvisible fontSize="30px" />
@@ -76,7 +75,7 @@ export function Login() {
                 <AiFillEye fontSize="30px" />
               )}
             </button>
-          </InputGroup>
+          </Input>
           <FormLink>Esqueci minha senha</FormLink>
           <FormButton type="submit">Entrar</FormButton>
           <p>
