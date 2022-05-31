@@ -13,13 +13,38 @@ import {
 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const FormSignInSchema = yup.object({
+  email: yup.string().required("E-mail obrigatório").trim(),
+  password: yup
+    .string()
+    .required("Senha obrigatória")
+    .typeError("Senha inválida")
+    .min(6, "Senha muito curta")
+    .max(20, "Senha muito longa")
+    .trim(),
+});
 
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(FormSignInSchema),
+  });
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  async function handleFormSubmit() {
+    console.log("Submit");
+  }
 
   return (
     <Content>
@@ -31,17 +56,17 @@ export function Login() {
             <AuthIcon />
           </span>
         </div>
-        <FormGroup>
+        <FormGroup onSubmit={handleSubmit(handleFormSubmit)}>
           <h2>Acessar Conta</h2>
           <InputGroup>
-            <FormInput required placeholder=" " type="email" />
+            <FormInput placeholder=" " type="email" {...register("email")} />
             <FormLabel>E-mail</FormLabel>
           </InputGroup>
           <InputGroup>
             <FormInput
-              required
               placeholder=" "
               type={showPassword ? "text" : "password"}
+              {...register("password")}
             />
             <FormLabel>Senha</FormLabel>
             <button type="button" onClick={handleShowPassword}>
