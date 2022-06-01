@@ -33,14 +33,14 @@ export const InputLayout = styled.input`
     border: 2px solid #3951b2;
   }
 
-  &:invalid {
-    border: 2px solid red;
-  }
-
   &:focus + label {
     font-size: 13px;
     top: 0;
     color: #3951b2;
+  }
+
+  &:invalid {
+    border: 2px solid red;
   }
 
   &:invalid + label {
@@ -51,7 +51,7 @@ export const InputLayout = styled.input`
 export const FormLabel = styled.label`
   pointer-events: none;
   position: absolute;
-  top: calc(50% - 8px);
+  top: 0;
   left: 15px;
   transition: all 0.1s linear;
   -webkit-transition: all 0.1s linear;
