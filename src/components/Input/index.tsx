@@ -46,7 +46,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           )}
         </button>
       )}
-      {!!error && <ErrorInput>{error.message}</ErrorInput>}
     </InputGroup>
   );
 };

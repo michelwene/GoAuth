@@ -4,13 +4,6 @@ export const InputGroup = styled.div`
   padding-top: 0.75rem;
   position: relative;
 
-  input:focus + label,
-  input:not(:placeholder-shown) + label {
-    font-size: 13px;
-    top: 0;
-    color: #3951b2;
-  }
-
   button {
     border: 0 none;
     background: inherit;
@@ -38,6 +31,20 @@ export const InputLayout = styled.input`
 
   &:focus {
     border: 2px solid #3951b2;
+  }
+
+  &:invalid {
+    border: 2px solid red;
+  }
+
+  &:focus + label {
+    font-size: 13px;
+    top: 0;
+    color: #3951b2;
+  }
+
+  &:invalid + label {
+    color: red;
   }
 `;
 
