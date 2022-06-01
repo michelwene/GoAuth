@@ -8,7 +8,6 @@ import {
   FormLink,
 } from "./styles";
 
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,7 +15,10 @@ import * as yup from "yup";
 import { Input } from "components/Input";
 
 const FormSignInSchema = yup.object({
-  email: yup.string().required("E-mail obrigatório").trim(),
+  email: yup
+    .string()
+    .required("E-mail obrigatório")
+    .typeError("E-mail inválido"),
   password: yup
     .string()
     .required("Senha obrigatória")
@@ -27,7 +29,6 @@ const FormSignInSchema = yup.object({
 });
 
 export function Login() {
-  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -35,10 +36,6 @@ export function Login() {
   } = useForm({
     resolver: yupResolver(FormSignInSchema),
   });
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   async function handleFormSubmit() {
     console.log("Submit");
@@ -63,19 +60,12 @@ export function Login() {
             error={errors.email}
           />
           <Input
-            type={showPassword ? "text" : "password"}
+            type="password"
             label="Senha"
             {...register("password")}
             error={errors.password}
-          >
-            <button type="button" onClick={handleShowPassword}>
-              {showPassword ? (
-                <AiFillEyeInvisible fontSize="30px" />
-              ) : (
-                <AiFillEye fontSize="30px" />
-              )}
-            </button>
-          </Input>
+            showPasswordButton
+          />
           <FormLink>Esqueci minha senha</FormLink>
           <FormButton type="submit">Entrar</FormButton>
           <p>

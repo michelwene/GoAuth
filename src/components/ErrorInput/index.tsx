@@ -8,7 +8,7 @@ interface ErrorInputProps {
 export function ErrorInput({ children }: ErrorInputProps) {
   return (
     <Content>
-      <FiAlertCircle size={20} color="#c53030" fontWeight={700} />
+      <FiAlertCircle size={16} color="#c53030" fontWeight={700} />
       <p>{children}</p>
     </Content>
   );

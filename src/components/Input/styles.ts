@@ -39,14 +39,6 @@ export const InputLayout = styled.input`
   &:focus {
     border: 2px solid #3951b2;
   }
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:focus:required:invalid {
-    border: 2px solid red;
-  }
 `;
 
 export const FormLabel = styled.label`
