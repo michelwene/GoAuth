@@ -10,9 +10,25 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  row-gap: 5rem;
   height: 100%;
   width: 50%;
+
+  & > div {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    width: 100%;
+
+    h1 {
+      padding-right: 1rem;
+    }
+
+    button {
+      max-width: 100px;
+      margin-left: 1rem;
+    }
+  }
 `;
 
 export const FormGroup = styled.form`

@@ -13,16 +13,6 @@ export const Container = styled.div`
   row-gap: 5rem;
   height: 100%;
   width: 50%;
-
-  & > div {
-    align-items: center;
-    display: flex;
-    flex: 1;
-
-    h1 {
-      padding-right: 1rem;
-    }
-  }
 `;
 
 export const FormGroup = styled.form`

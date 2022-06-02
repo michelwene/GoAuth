@@ -60,7 +60,7 @@ export function Login() {
           <FormLink>Esqueci minha senha</FormLink>
           <Button type="submit">Entrar</Button>
           <p>
-            Seu primeiro acesso? <a>Criar conta</a>
+            Seu primeiro acesso? <a href="/registrar-se">Criar conta</a>
           </p>
         </FormGroup>
       </Container>
