@@ -52,7 +52,7 @@ export function Register() {
           </Link>
         </div>
         <FormGroup onSubmit={handleSubmit(handleFormSubmit)}>
-          <h2>Acessar Conta</h2>
+          <h2>Registrar-se</h2>
           <Input
             label="Nome Completo"
             type="name"
