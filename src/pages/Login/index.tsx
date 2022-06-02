@@ -1,23 +1,20 @@
-import {
-  Aside,
-  AuthIcon,
-  Container,
-  Content,
-  FormButton,
-  FormGroup,
-  FormLink,
-} from "./styles";
+import { Container, Content, FormGroup, FormLink } from "./styles";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Input } from "components/Input";
+import { Logo } from "components/Logo";
+import { Banner } from "components/Banner";
+import { Button } from "components/Button";
 
 const FormSignInSchema = yup.object({
   email: yup
     .string()
+    .email("Email inválido")
     .required("E-mail obrigatório")
     .typeError("E-mail inválido"),
+
   password: yup
     .string()
     .required("Senha obrigatória")
@@ -42,14 +39,9 @@ export function Login() {
 
   return (
     <Content>
-      <Aside />
+      <Banner />
       <Container>
-        <div>
-          <h1>GoAuth</h1>
-          <span>
-            <AuthIcon />
-          </span>
-        </div>
+        <Logo />
         <FormGroup onSubmit={handleSubmit(handleFormSubmit)}>
           <h2>Acessar Conta</h2>
           <Input
@@ -66,7 +58,7 @@ export function Login() {
             showPasswordButton
           />
           <FormLink>Esqueci minha senha</FormLink>
-          <FormButton type="submit">Entrar</FormButton>
+          <Button type="submit">Entrar</Button>
           <p>
             Seu primeiro acesso? <a>Criar conta</a>
           </p>

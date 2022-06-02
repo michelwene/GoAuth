@@ -38,14 +38,6 @@ export const InputLayout = styled.input`
     top: 0;
     color: #3951b2;
   }
-
-  &:invalid {
-    border: 2px solid red;
-  }
-
-  &:invalid + label {
-    color: red;
-  }
 `;
 
 export const FormLabel = styled.label`
