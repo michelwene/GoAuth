@@ -7,6 +7,7 @@ import { Input } from "components/Input";
 import { Logo } from "components/Logo";
 import { Banner } from "components/Banner";
 import { Button } from "components/Button";
+import { Link } from "react-router-dom";
 
 const FormSignInSchema = yup.object({
   email: yup
@@ -41,7 +42,9 @@ export function Login() {
     <Content>
       <Banner />
       <Container>
-        <Logo />
+        <div>
+          <Logo />
+        </div>
         <FormGroup onSubmit={handleSubmit(handleFormSubmit)}>
           <h2>Acessar Conta</h2>
           <Input
@@ -57,10 +60,10 @@ export function Login() {
             error={errors.password}
             showPasswordButton
           />
-          <FormLink>Esqueci minha senha</FormLink>
+          <Link to="/resgatar-senha">Esqueci minha senha</Link>
           <Button type="submit">Entrar</Button>
           <p>
-            Seu primeiro acesso? <a href="/registrar-se">Criar conta</a>
+            Seu primeiro acesso? <Link to="/registrar-se">Criar conta</Link>
           </p>
         </FormGroup>
       </Container>

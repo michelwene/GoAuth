@@ -13,6 +13,15 @@ export const Container = styled.div`
   row-gap: 5rem;
   height: 100%;
   width: 50%;
+
+  & > div {
+    align-items: center;
+    column-gap: 1rem;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+  }
 `;
 
 export const FormGroup = styled.form`
@@ -35,14 +44,16 @@ export const FormGroup = styled.form`
       text-decoration: underline;
     }
   }
-`;
 
-export const FormLink = styled.a`
-  align-self: flex-start;
-  font-weight: 700;
-  text-decoration: underline;
+  > a {
+    align-self: flex-start;
+    font-weight: 700;
+    text-decoration: underline;
 
-  &:hover {
-    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
   }
 `;
+
+export const FormLink = styled.a``;
