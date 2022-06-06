@@ -1,22 +1,8 @@
 import { ErrorInput } from "components/ErrorInput";
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  InputHTMLAttributes,
-  useState,
-} from "react";
-import { FieldError } from "react-hook-form";
+import { forwardRef, ForwardRefRenderFunction, useState } from "react";
 import { FormLabel, InputGroup, InputLayout } from "./styles";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name?: string;
-  error: FieldError;
-  type: string;
-  label: string;
-  onClick?: () => void;
-  showPasswordButton?: boolean;
-}
+import { InputProps } from "types/input";
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { name, error = null, type, label, showPasswordButton, onClick, ...rest },
