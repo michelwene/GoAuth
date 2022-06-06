@@ -8,8 +8,8 @@ import { Logo } from "components/Logo";
 import { Banner } from "components/Banner";
 import { Button } from "components/Button";
 import { Link } from "react-router-dom";
-import { PayLoadData } from "types/auth";
 import { authService } from "services/useCases/AuthService";
+import { PayLoadData } from "types/auth";
 
 const FormSignInSchema = yup.object({
   email: yup
