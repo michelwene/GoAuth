@@ -1,8 +1,5 @@
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "services/firebase";
 
 interface PayLoadSignIn {
   email: string;
@@ -10,25 +7,22 @@ interface PayLoadSignIn {
 }
 
 class AuthService {
-  async SignIn(payload: PayLoadSignIn) {
+  async registerUser(email, password) {
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(user);
     try {
-      const auth = getAuth();
-      const { user } = await signInWithEmailAndPassword(
-        auth,
-        payload.email,
-        payload.password
-      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async SignIn() {
+    try {
     } catch (err) {}
   }
 
-  async registerUser(payload: PayLoadSignIn) {
+  async SignOut() {
     try {
-      const auth = getAuth();
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        payload.email,
-        payload.password
-      );
     } catch (err) {}
   }
 }
