@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,8 +11,20 @@ class AuthService {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     console.log(user);
     try {
-    } catch (error) {
-      console.log(error.message);
+    } catch (err) {
+      const error = err as AxiosError;
+
+      if (error.isAxiosError) {
+        switch (error.response.status) {
+          case 400:
+            throw new Error("Email já cadastrado");
+          case 500:
+            throw new Error("Erro interno do servidor");
+          default:
+            throw new Error(error.response.statusText);
+        }
+      }
+      throw new Error(err.message);
     }
   }
 
@@ -19,8 +32,20 @@ class AuthService {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       return user;
-    } catch (error) {
-      throw new Error(error.message);
+    } catch (err) {
+      const error = err as AxiosError;
+
+      if (error.isAxiosError) {
+        switch (error.response.status) {
+          case 401:
+            throw new Error("Email ou senha inválidos");
+          case 500:
+            throw new Error("Erro interno do servidor");
+          default:
+            throw new Error(error.response.statusText);
+        }
+      }
+      throw new Error(err.message);
     }
   }
 

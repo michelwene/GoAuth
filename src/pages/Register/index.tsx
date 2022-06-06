@@ -10,6 +10,8 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { authService } from "services/useCases/AuthService";
 import { PayLoadData } from "types/auth";
+import { toast } from "react-toastify";
+import { CustomToast } from "components/CustomTostfy";
 
 const FormRegisterSchema = yup.object({
   name: yup.string().required("Nome obrigatório"),
@@ -41,9 +43,24 @@ export function Register() {
   async function handleFormSubmit({ email, password }: PayLoadData) {
     try {
       await authService.registerUser(email, password);
+      toast(
+        <CustomToast
+          status="success"
+          title="Sucesso!"
+          message="Usuário cadastrado com sucesso!"
+        />
+      );
       reset();
     } catch (err) {
-      console.log(err);
+      toast(
+        <CustomToast
+          status="error"
+          title="Ops..."
+          message={
+            err.message ?? "Não foi possível realizar o cadastro do usuário."
+          }
+        />
+      );
     }
   }
   return (
@@ -87,7 +104,7 @@ export function Register() {
             error={errors.password_confirmation}
             showPasswordButton
           />
-          <Button type="submit">
+          <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Cadastrando..." : "Cadastrar"}
           </Button>
         </FormGroup>

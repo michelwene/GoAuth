@@ -5,13 +5,18 @@ interface ButtonProps {
   type: "submit" | "button";
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const buttonBase: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
-  { type, children },
+  { type, disabled, children },
   ref
 ) => {
-  return <FormButton type={type}>{children}</FormButton>;
+  return (
+    <FormButton type={type} disabled={disabled}>
+      {children}
+    </FormButton>
+  );
 };
 
 export const Button = forwardRef(buttonBase);

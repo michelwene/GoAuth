@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { ToastContainer } from "react-toastify";
 import { GlobalStyle } from "styles/global";
 import App from "./App";
 
@@ -10,5 +11,6 @@ root.render(
   <React.StrictMode>
     <App />
     <GlobalStyle />
+    <ToastContainer hideProgressBar autoClose={3000} />
   </React.StrictMode>
 );
