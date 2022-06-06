@@ -1,12 +1,6 @@
 import { forwardRef, ForwardRefRenderFunction } from "react";
+import { ButtonProps } from "types/button";
 import { FormButton } from "./styles";
-
-interface ButtonProps {
-  type: "submit" | "button";
-  children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-}
 
 const buttonBase: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
   { type, disabled, children },
