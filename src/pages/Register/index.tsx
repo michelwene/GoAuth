@@ -9,11 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { authService } from "services/useCases/AuthService";
-
-type FormRegisterData = {
-  email: string;
-  password: string;
-};
+import { PayLoadData } from "types/auth";
 
 const FormRegisterSchema = yup.object({
   name: yup.string().required("Nome obrigatório"),
@@ -41,8 +37,12 @@ export function Register() {
     resolver: yupResolver(FormRegisterSchema),
   });
 
-  async function handleFormSubmit({ email, password }: FormRegisterData) {
-    await authService.registerUser(email, password);
+  async function handleFormSubmit({ email, password }: PayLoadData) {
+    try {
+      await authService.registerUser(email, password);
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <Content>

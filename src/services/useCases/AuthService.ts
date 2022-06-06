@@ -1,10 +1,9 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { auth } from "services/firebase";
-
-interface PayLoadSignIn {
-  email: string;
-  password: string;
-}
 
 class AuthService {
   async registerUser(email, password) {
@@ -16,14 +15,21 @@ class AuthService {
     }
   }
 
-  async SignIn() {
+  async SignIn(email, password) {
     try {
-    } catch (err) {}
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      return user;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   async SignOut() {
     try {
-    } catch (err) {}
+      await signOut(auth);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }
 

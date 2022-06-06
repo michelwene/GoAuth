@@ -8,6 +8,8 @@ import { Logo } from "components/Logo";
 import { Banner } from "components/Banner";
 import { Button } from "components/Button";
 import { Link } from "react-router-dom";
+import { PayLoadData } from "types/auth";
+import { authService } from "services/useCases/AuthService";
 
 const FormSignInSchema = yup.object({
   email: yup
@@ -29,13 +31,20 @@ export function Login() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(FormSignInSchema),
   });
 
-  async function handleFormSubmit() {
-    console.log("Submit");
+  async function handleFormSubmit({ email, password }: PayLoadData) {
+    try {
+      const response = await authService.SignIn(email, password);
+      console.log(response);
+      reset();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
