@@ -32,7 +32,8 @@ export function Register() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(FormRegisterSchema),
   });
@@ -40,6 +41,7 @@ export function Register() {
   async function handleFormSubmit({ email, password }: PayLoadData) {
     try {
       await authService.registerUser(email, password);
+      reset();
     } catch (err) {
       console.log(err);
     }
@@ -85,7 +87,9 @@ export function Register() {
             error={errors.password_confirmation}
             showPasswordButton
           />
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">
+            {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+          </Button>
         </FormGroup>
       </Container>
     </Content>
