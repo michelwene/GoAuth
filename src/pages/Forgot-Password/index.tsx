@@ -8,14 +8,7 @@ import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-const FormForgotPasswordSchema = yup.object({
-  email: yup
-    .string()
-    .email("Email inválido")
-    .required("E-mail obrigatório")
-    .trim(),
-});
+import { FormForgotPasswordSchema } from "components/Shared/Validators/schema";
 
 export function ForgotPassword() {
   const {

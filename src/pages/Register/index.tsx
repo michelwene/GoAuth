@@ -4,31 +4,14 @@ import { Input } from "components/Input";
 import { Logo } from "components/Logo";
 import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { authService } from "services/useCases/AuthService";
 import { PayLoadData } from "types/auth";
 import { toast } from "react-toastify";
 import { CustomToast } from "components/CustomTostfy";
-
-const FormRegisterSchema = yup.object({
-  name: yup.string().required("Nome obrigatório"),
-  email: yup
-    .string()
-    .email("Email inválido")
-    .required("E-mail obrigatório")
-    .trim(),
-  password: yup
-    .string()
-    .required("Senha obrigatória")
-    .min(6, "Senha muito curta")
-    .max(20, "Senha muito longa"),
-  password_confirmation: yup
-    .string()
-    .oneOf([null, yup.ref("password")], "As senha não conferem"),
-});
+import { FormRegisterSchema } from "components/Shared/Validators/schema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export function Register() {
   const {

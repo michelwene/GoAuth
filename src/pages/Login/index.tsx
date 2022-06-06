@@ -10,22 +10,7 @@ import { Button } from "components/Button";
 import { Link } from "react-router-dom";
 import { authService } from "services/useCases/AuthService";
 import { PayLoadData } from "types/auth";
-
-const FormSignInSchema = yup.object({
-  email: yup
-    .string()
-    .email("Email inválido")
-    .required("E-mail obrigatório")
-    .typeError("E-mail inválido"),
-
-  password: yup
-    .string()
-    .required("Senha obrigatória")
-    .typeError("Senha inválida")
-    .min(6, "Senha muito curta")
-    .max(20, "Senha muito longa")
-    .trim(),
-});
+import { FormSignInSchema } from "components/Shared/Validators/schema";
 
 export function Login() {
   const {
