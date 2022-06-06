@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import bgCarton from "assets/images/carton.jpg";
 
 export const Aside = styled.aside`
-  background: url("/assets/carton.jpg") center / cover no-repeat;
+  background: url(${bgCarton}) center / cover no-repeat;
   display: flex;
   flex: 1;
   height: 100%;

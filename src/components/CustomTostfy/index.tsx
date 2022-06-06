@@ -7,6 +7,7 @@ export function CustomToast({ title, message, status }: CustomToastProps) {
     success: <IconToastSucess />,
     error: <IconToastError />,
   };
+
   return (
     <>
       <Container typeError={status}>

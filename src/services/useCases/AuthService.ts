@@ -7,13 +7,12 @@ import {
 import { auth } from "services/firebase";
 
 class AuthService {
-  async registerUser(email, password) {
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
+  async registerUser(email: string, password: string) {
     try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      return user;
     } catch (err) {
       const error = err as AxiosError;
-
       if (error.isAxiosError) {
         switch (error.response.status) {
           case 400:
@@ -28,7 +27,7 @@ class AuthService {
     }
   }
 
-  async SignIn(email, password) {
+  async SignIn(email: string, password: string) {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       return user;

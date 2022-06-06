@@ -5,7 +5,7 @@ import { Logo } from "components/Logo";
 import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authService } from "services/useCases/AuthService";
 import { PayLoadData } from "types/auth";
 import { toast } from "react-toastify";
@@ -22,10 +22,12 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(FormRegisterSchema),
   });
+  const navigate = useNavigate();
 
   async function handleFormSubmit({ email, password }: PayLoadData) {
     try {
       await authService.registerUser(email, password);
+
       toast(
         <CustomToast
           status="success"
@@ -33,7 +35,6 @@ export function Register() {
           message="Usuário cadastrado com sucesso!"
         />
       );
-      reset();
     } catch (err) {
       toast(
         <CustomToast
