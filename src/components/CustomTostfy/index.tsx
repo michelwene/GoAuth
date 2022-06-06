@@ -1,11 +1,6 @@
 import { IconToastError, IconToastSucess } from "assets/icons/icons";
+import { CustomToastProps } from "types/toastify";
 import { Container, IconContainer } from "./styles";
-
-interface CustomToastProps {
-  message: string;
-  status: "success" | "error";
-  title?: string;
-}
 
 export function CustomToast({ title, message, status }: CustomToastProps) {
   const icon = {
