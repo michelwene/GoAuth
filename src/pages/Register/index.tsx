@@ -41,7 +41,8 @@ export function Register() {
           status="error"
           title="Ops..."
           message={
-            err.message ?? "Não foi possível realizar o cadastro do usuário."
+            "E-mail já existente" ??
+            "Não foi possível realizar o cadastro do usuário."
           }
         />
       );
