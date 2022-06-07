@@ -38,9 +38,6 @@ export function Login() {
         />
       );
       reset();
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 3000);
     } catch (err) {
       toast(
         <CustomToast

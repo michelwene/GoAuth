@@ -21,37 +21,21 @@ export const Container = styled.div`
     justify-content: center;
     flex: 1;
     width: 100%;
+
+    button {
+      align-items: center;
+      justify-content: center;
+      max-width: 100px;
+    }
   }
 `;
 
-export const FormGroup = styled.form`
-  align-items: center;
-  display: flex;
+export const InfoUser = styled.div`
   flex: 2;
   flex-direction: column;
-
   row-gap: 1rem;
 
-  h2 {
-    font-weight: 400;
-    padding-bottom: 3rem;
-  }
-
-  p > a {
-    font-weight: 700;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  > a {
-    align-self: flex-start;
-    font-weight: 700;
-    text-decoration: underline;
-
-    &:hover {
-      text-decoration: none;
-    }
+  h1 {
+    font-size: 2rem;
   }
 `;
