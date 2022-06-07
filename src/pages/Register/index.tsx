@@ -35,6 +35,10 @@ export function Register() {
           message="Usuário cadastrado com sucesso!"
         />
       );
+      reset();
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } catch (err) {
       toast(
         <CustomToast
