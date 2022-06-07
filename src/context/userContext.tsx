@@ -13,13 +13,23 @@ type User = {
   email: string;
 };
 
-type SignInCredentials = {
+type signInData = {
   email: string;
   password: string;
 };
 
+type CredentialsData = {
+  email: string;
+  name: string;
+  password: string;
+};
+
 type AuthContextData = {
-  signIn: (credentials: SignInCredentials) => Promise<void>;
+  signIn: (credentials: signInData) => Promise<void>;
+  logoutUser: () => void;
+  registerUser: (credentials: CredentialsData) => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
+  user: User;
 };
 
 interface UserContextProviderProps {
@@ -45,11 +55,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     return unsubscribe;
   }, []);
 
-  const registerUser = async (
-    email: string,
-    name: string,
-    password: string
-  ) => {
+  const registerUser = async ({ email, name, password }: CredentialsData) => {
     try {
       setLoading(true);
       await createUserWithEmailAndPassword(auth, email, password);
@@ -63,7 +69,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     }
   };
 
-  const signIn = async ({ email, password }: SignInCredentials) => {
+  const signIn = async ({ email, password }: signInData) => {
     try {
       setLoading(true);
       const response = await signInWithEmailAndPassword(auth, email, password);

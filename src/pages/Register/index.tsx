@@ -6,12 +6,12 @@ import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { authService } from "services/useCases/AuthService";
 import { PayLoadData } from "types/auth";
 import { toast } from "react-toastify";
 import { CustomToast } from "components/CustomTostfy";
 import { FormRegisterSchema } from "components/Shared/Validators/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useUserContext } from "context/userContext";
 
 export function Register() {
   const {
@@ -22,12 +22,12 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(FormRegisterSchema),
   });
+  const { registerUser } = useUserContext();
   const navigate = useNavigate();
 
-  async function handleFormSubmit({ email, password }: PayLoadData) {
+  async function handleFormSubmit({ email, name, password }: PayLoadData) {
     try {
-      await authService.registerUser(email, password);
-
+      await registerUser({ email, name, password });
       toast(
         <CustomToast
           status="success"

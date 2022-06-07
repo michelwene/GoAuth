@@ -2,17 +2,16 @@ import { Container, Content, FormGroup } from "./styles";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { Input } from "components/Input";
 import { Logo } from "components/Logo";
 import { Banner } from "components/Banner";
 import { Button } from "components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { authService } from "services/useCases/AuthService";
 import { PayLoadData } from "types/auth";
 import { FormSignInSchema } from "components/Shared/Validators/schema";
 import { toast } from "react-toastify";
 import { CustomToast } from "components/CustomTostfy";
+import { useUserContext } from "context/userContext";
 
 export function Login() {
   const {
@@ -24,12 +23,13 @@ export function Login() {
     resolver: yupResolver(FormSignInSchema),
   });
 
+  const { signIn } = useUserContext();
   const navigate = useNavigate();
 
   async function handleFormSubmit({ email, password }: PayLoadData) {
     try {
-      const response = await authService.SignIn(email, password);
-      console.log(response);
+      await signIn({ email, password });
+
       toast(
         <CustomToast
           status="success"

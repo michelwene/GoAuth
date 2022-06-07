@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormForgotPasswordSchema } from "components/Shared/Validators/schema";
+import { useUserContext } from "context/userContext";
+import { PayLoadData } from "types/auth";
 
 export function ForgotPassword() {
   const {
@@ -19,8 +21,10 @@ export function ForgotPassword() {
     resolver: yupResolver(FormForgotPasswordSchema),
   });
 
-  async function handleFormSubmit(data) {
-    console.log(data);
+  const { forgotPassword } = useUserContext();
+
+  async function handleFormSubmit({ email }: PayLoadData) {
+    await forgotPassword(email);
   }
 
   return (
