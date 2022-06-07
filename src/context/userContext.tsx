@@ -9,6 +9,10 @@ import {
 } from "firebase/auth";
 import { auth } from "services/firebase";
 
+type User = {
+  email: string;
+};
+
 type SignInCredentials = {
   email: string;
   password: string;
@@ -27,7 +31,7 @@ const UserContext = createContext({} as AuthContextData);
 export const useUserContext = () => useContext(UserContext);
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
