@@ -9,8 +9,7 @@ import { auth } from "services/firebase";
 class AuthService {
   async registerUser(email: string, password: string) {
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      return user;
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
       const error = err as AxiosError;
       if (error.isAxiosError) {

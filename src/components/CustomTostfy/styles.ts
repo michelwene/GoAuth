@@ -10,7 +10,7 @@ export const Container = styled.div<typeError>`
   justify-content: flex-start;
   position: relative;
   width: 100%;
-  z-index: 9999999999999999999;
+  z-index: 99999999999;
   span {
     font-size: 0.9375rem;
     font-weight: 400;
