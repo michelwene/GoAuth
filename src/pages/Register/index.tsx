@@ -5,7 +5,7 @@ import { Logo } from "components/Logo";
 import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { PayLoadData } from "types/auth";
 import { toast } from "react-toastify";
 import { CustomToast } from "components/CustomTostfy";
@@ -22,8 +22,7 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(FormRegisterSchema),
   });
-  const { registerUser } = useUserContext();
-  const navigate = useNavigate();
+  const { registerUser, error } = useUserContext();
 
   async function handleFormSubmit({ email, name, password }: PayLoadData) {
     try {
@@ -36,22 +35,17 @@ export function Register() {
         />
       );
       reset();
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
     } catch (err) {
       toast(
         <CustomToast
           status="error"
           title="Ops..."
-          message={
-            "E-mail já existente" ??
-            "Não foi possível realizar o cadastro do usuário."
-          }
+          message={error ?? "Não foi possível realizar o cadastro do usuário."}
         />
       );
     }
   }
+
   return (
     <Content>
       <Banner />

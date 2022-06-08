@@ -24,7 +24,7 @@ export function ForgotPassword() {
   const { forgotPassword } = useUserContext();
 
   async function handleFormSubmit({ email }: PayLoadData) {
-    await forgotPassword(email);
+    forgotPassword(email);
   }
 
   return (

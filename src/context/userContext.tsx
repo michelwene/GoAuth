@@ -25,11 +25,12 @@ type CredentialsData = {
 };
 
 type AuthContextData = {
-  signIn: (credentials: signInData) => Promise<void>;
+  signIn: (credentials: signInData) => void;
   logoutUser: () => void;
-  registerUser: (credentials: CredentialsData) => Promise<void>;
-  forgotPassword: (email: string) => Promise<void>;
+  registerUser: (credentials: CredentialsData) => void;
+  forgotPassword: (email: string) => void;
   user: User;
+  error: string;
 };
 
 interface UserContextProviderProps {
@@ -55,11 +56,14 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     return unsubscribe;
   }, []);
 
-  const registerUser = async ({ email, name, password }: CredentialsData) => {
+  const registerUser = async ({ email, password }: CredentialsData) => {
     try {
       setLoading(true);
-      await createUserWithEmailAndPassword(auth, email, password);
-      const response = updateProfile(auth.currentUser, { displayName: name });
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       console.log(response);
     } catch (err) {

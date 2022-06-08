@@ -24,7 +24,6 @@ export function Login() {
   });
 
   const { signIn } = useUserContext();
-  const navigate = useNavigate();
 
   async function handleFormSubmit({ email, password }: PayLoadData) {
     try {

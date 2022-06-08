@@ -15,6 +15,7 @@ root.render(
     <React.StrictMode>
       <App />
       <GlobalStyle />
+
       <ToastContainer hideProgressBar={true} autoClose={3000} />
     </React.StrictMode>
   </UserContextProvider>
