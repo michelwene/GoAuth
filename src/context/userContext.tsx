@@ -48,8 +48,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   const signIn = async ({ email, password }: signInData) => {
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
+      const data = await signInWithEmailAndPassword(auth, email, password);
+      console.log(data);
       toast(
         <CustomToast
           status="success"
@@ -57,6 +57,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
           message="Login efetuado com sucesso!"
         />
       );
+      setUser(data.user);
     } catch (err) {
       setError(err.message);
       toast(
@@ -77,7 +78,28 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   };
 
   const forgotPassword = async (email: string) => {
-    return sendPasswordResetEmail(auth, email);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast(
+        <CustomToast
+          status="success"
+          title="Sucesso!"
+          message="E-mail de recuperação enviado com sucesso!
+        "
+        />
+      );
+    } catch (err) {
+      toast(
+        <CustomToast
+          status="error"
+          title="Ops..."
+          message={
+            "E-mail não encontrado" ??
+            "Ocorreu um erro ao realizar recuperação da senha."
+          }
+        />
+      );
+    }
   };
 
   const contextValue = {

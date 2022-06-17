@@ -9,8 +9,6 @@ import { Button } from "components/Button";
 import { Link } from "react-router-dom";
 import { PayLoadData } from "types/auth";
 import { FormSignInSchema } from "Shared/Validators/schema";
-import { toast } from "react-toastify";
-import { CustomToast } from "components/CustomTostfy";
 import { useUserContext } from "context/userContext";
 
 export function Login() {
@@ -26,9 +24,7 @@ export function Login() {
   const { signIn } = useUserContext();
 
   async function handleFormSubmit({ email, password }: PayLoadData) {
-    try {
-      signIn({ email, password });
-    } catch (err) {}
+    signIn({ email, password });
   }
 
   return (

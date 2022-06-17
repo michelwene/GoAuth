@@ -16,6 +16,7 @@ export function ForgotPassword() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(FormForgotPasswordSchema),
@@ -24,7 +25,12 @@ export function ForgotPassword() {
   const { forgotPassword } = useUserContext();
 
   async function handleFormSubmit({ email }: PayLoadData) {
-    forgotPassword(email);
+    try {
+      await forgotPassword(email);
+      reset();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
