@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile,
   onAuthStateChanged,
   sendPasswordResetEmail,
 } from "firebase/auth";
@@ -18,16 +16,9 @@ type signInData = {
   password: string;
 };
 
-type CredentialsData = {
-  email: string;
-  name: string;
-  password: string;
-};
-
 type AuthContextData = {
   signIn: (credentials: signInData) => void;
   logoutUser: () => void;
-  registerUser: (credentials: CredentialsData) => void;
   forgotPassword: (email: string) => void;
   user: User;
   error: string;
@@ -56,23 +47,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     return unsubscribe;
   }, []);
 
-  const registerUser = async ({ email, password }: CredentialsData) => {
-    try {
-      setLoading(true);
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      console.log(response);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const signIn = async ({ email, password }: signInData) => {
     try {
       setLoading(true);
@@ -97,7 +71,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     user,
     loading,
     error,
-    registerUser,
     signIn,
     logoutUser,
     forgotPassword,
@@ -107,3 +80,5 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(UserContext);

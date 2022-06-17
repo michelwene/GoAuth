@@ -8,7 +8,7 @@ import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormForgotPasswordSchema } from "components/Shared/Validators/schema";
+import { FormForgotPasswordSchema } from "Shared/Validators/schema";
 import { useUserContext } from "context/userContext";
 import { PayLoadData } from "types/auth";
 

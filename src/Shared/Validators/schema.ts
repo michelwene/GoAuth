@@ -1,7 +1,6 @@
 import * as yup from "yup";
 
 export const FormRegisterSchema = yup.object({
-  name: yup.string().required("Nome obrigatório"),
   email: yup
     .string()
     .email("Email inválido")

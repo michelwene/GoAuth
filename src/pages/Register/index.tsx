@@ -5,15 +5,22 @@ import { Logo } from "components/Logo";
 import { Container, Content, FormGroup } from "./styles";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PayLoadData } from "types/auth";
 import { toast } from "react-toastify";
 import { CustomToast } from "components/CustomTostfy";
-import { FormRegisterSchema } from "components/Shared/Validators/schema";
+import { FormRegisterSchema } from "Shared/Validators/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserContext } from "context/userContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "services/firebase";
 
-export function Register() {
+type CredentialsData = {
+  email: string;
+  password: string;
+};
+
+export function RegisterUser() {
   const {
     register,
     handleSubmit,
@@ -22,25 +29,36 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(FormRegisterSchema),
   });
-  const { registerUser, error } = useUserContext();
 
-  async function handleFormSubmit({ email, name, password }: PayLoadData) {
+  const navigate = useNavigate();
+
+  async function registerUser({ email, password }: CredentialsData) {
     try {
-      await registerUser({ email, name, password });
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      console.log(response);
+      reset();
       toast(
         <CustomToast
           status="success"
           title="Sucesso!"
-          message="Usuário cadastrado com sucesso!"
+          message="Usuário cadastrado com sucesso!!"
         />
       );
-      reset();
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } catch (err) {
+      console.log(err);
       toast(
         <CustomToast
           status="error"
           title="Ops..."
-          message={error ?? "Não foi possível realizar o cadastro do usuário."}
+          message="Ocorreu um erro ao realizar o cadastro, verifique o e-mail/senha."
         />
       );
     }
@@ -59,14 +77,8 @@ export function Register() {
             </Button>
           </Link>
         </div>
-        <FormGroup onSubmit={handleSubmit(handleFormSubmit)}>
+        <FormGroup onSubmit={handleSubmit(registerUser)}>
           <h2>Registrar-se</h2>
-          <Input
-            label="Nome Completo"
-            type="name"
-            {...register("name")}
-            error={errors.name}
-          />
           <Input
             label="E-mail"
             type="email"
