@@ -27,28 +27,8 @@ export function Login() {
 
   async function handleFormSubmit({ email, password }: PayLoadData) {
     try {
-      await signIn({ email, password });
-
-      toast(
-        <CustomToast
-          status="success"
-          title="Sucesso!"
-          message="Login efetuado com sucesso!"
-        />
-      );
-      reset();
-    } catch (err) {
-      toast(
-        <CustomToast
-          status="error"
-          title="Ops..."
-          message={
-            "E-mail e/ou senha Incorretos" ??
-            "Ocorreu um erro ao realizar o Login."
-          }
-        />
-      );
-    }
+      signIn({ email, password });
+    } catch (err) {}
   }
 
   return (

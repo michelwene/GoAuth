@@ -6,6 +6,8 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "services/firebase";
+import { CustomToast } from "components/CustomTostfy";
+import { toast } from "react-toastify";
 
 type User = {
   email: string;
@@ -48,8 +50,25 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
       console.log(response);
+      toast(
+        <CustomToast
+          status="success"
+          title="Sucesso!"
+          message="Login efetuado com sucesso!"
+        />
+      );
     } catch (err) {
       setError(err.message);
+      toast(
+        <CustomToast
+          status="error"
+          title="Ops..."
+          message={
+            "E-mail e/ou senha Incorretos" ??
+            "Ocorreu um erro ao realizar o Login."
+          }
+        />
+      );
     }
   };
 

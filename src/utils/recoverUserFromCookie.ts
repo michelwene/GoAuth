@@ -2,7 +2,7 @@ import { parseCookies } from "nookies";
 import { IUserData } from "types/auth";
 
 export function handleRecoverUserFromCookie() {
-  const { "@GoAuth:useData": userData } = parseCookies();
+  const { "@goAuth:useData": userData } = parseCookies();
 
   if (!userData) return null;
 

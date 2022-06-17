@@ -11,7 +11,7 @@ export function handleSaveDataInCookies({
   data,
   time,
 }: ISaveDataInCookies) {
-  setCookie(undefined, `goAuth:${keyCookie}`, data, {
+  setCookie(undefined, `@goAuth:${keyCookie}`, data, {
     maxAge: time ?? 60 * 60 * 24 * 7,
     path: "/",
   });
