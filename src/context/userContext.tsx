@@ -1,13 +1,13 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import {
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "services/firebase";
 import { CustomToast } from "components/CustomTostfy";
 import { toast } from "react-toastify";
+import { handleSaveDataInCookies } from "utils/saveDataInCookies";
 
 type User = {
   email: string;
@@ -38,14 +38,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<User>(null);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (response) => {
-      response ? setUser(response) : setUser(null);
-      setError("");
-    });
-    return unsubscribe;
-  }, []);
-
   const signIn = async ({ email, password }: signInData) => {
     try {
       const data = await signInWithEmailAndPassword(auth, email, password);
@@ -57,6 +49,18 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
           message="Login efetuado com sucesso!"
         />
       );
+      handleSaveDataInCookies({
+        keyCookie: "userData",
+        data: JSON.stringify(data),
+      });
+      handleSaveDataInCookies({
+        keyCookie: "accessToken",
+        data: data.user.uid,
+      });
+      handleSaveDataInCookies({
+        keyCookie: "refreshToken",
+        data: data.user.refreshToken,
+      });
       setUser(data.user);
     } catch (err) {
       setError(err.message);

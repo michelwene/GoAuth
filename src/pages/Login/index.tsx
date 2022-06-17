@@ -6,7 +6,7 @@ import { Input } from "components/Input";
 import { Logo } from "components/Logo";
 import { Banner } from "components/Banner";
 import { Button } from "components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PayLoadData } from "types/auth";
 import { FormSignInSchema } from "Shared/Validators/schema";
 import { useUserContext } from "context/userContext";
@@ -15,16 +15,21 @@ export function Login() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(FormSignInSchema),
   });
 
-  const { signIn } = useUserContext();
+  const { signIn, error } = useUserContext();
+  const navigate = useNavigate();
 
   async function handleFormSubmit({ email, password }: PayLoadData) {
-    signIn({ email, password });
+    try {
+      await signIn({ email, password });
+      navigate("/dashboard");
+    } catch (err) {
+      alert(error);
+    }
   }
 
   return (
