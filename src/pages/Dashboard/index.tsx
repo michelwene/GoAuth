@@ -22,7 +22,6 @@ export function Dashboard() {
       alert("error");
     }
   }
-
   return (
     <Content>
       <Banner />
