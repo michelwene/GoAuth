@@ -34,13 +34,8 @@ export function RegisterUser() {
 
   async function registerUser({ email, password }: CredentialsData) {
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
 
-      console.log(response);
       reset();
       toast(
         <CustomToast

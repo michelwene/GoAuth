@@ -34,28 +34,22 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<User>(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (response) => {
       response ? setUser(response) : setUser(null);
       setError("");
-      setLoading(false);
     });
     return unsubscribe;
   }, []);
 
   const signIn = async ({ email, password }: signInData) => {
     try {
-      setLoading(true);
       const response = await signInWithEmailAndPassword(auth, email, password);
       console.log(response);
     } catch (err) {
       setError(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -69,7 +63,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   const contextValue = {
     user,
-    loading,
     error,
     signIn,
     logoutUser,

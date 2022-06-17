@@ -3,3 +3,8 @@ export interface PayLoadData {
   name?: string;
   password?: string;
 }
+
+export interface IUserData {
+  id: string;
+  email: string;
+}
